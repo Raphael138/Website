@@ -20,3 +20,5 @@ Then:
 from runQueries import *
 ```
 Then you should be able to make queries in the database of the website without having to use SQL, but rather the functions written in python in the runQueries.py file(ie. printUserInfo(), deletUser(usernm)).
+
+The website includes a database, with ability to sign in, sign up and remove your account. 
