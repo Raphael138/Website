@@ -1,4 +1,3 @@
-
 """IMPORT THIS FILE IN A PYTHON CMD IN ORDER TO RUN QUERIES ON THE DATABASE"""
 
 from flask import Flask, render_template, url_for, redirect, request, session, flash
