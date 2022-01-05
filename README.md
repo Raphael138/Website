@@ -21,4 +21,4 @@ from runQueries import *
 ```
 Then you should be able to make queries in the database of the website without having to use SQL, but rather the functions written in python in the runQueries.py file(ie. printUserInfo(), deletUser(usernm)).
 
-The website includes a database, with ability to sign in, sign up and remove your account. There is also a homepage. I also added the ability to text between user.
+The website includes a database, with ability to sign in, sign up and remove your account. There is also a homepage. I also added the ability to text between user. Just like you can do queries for the user database, you can also do the same for the texting feature. Instead of importing `runQueries`, import creatingChatDataframe.
