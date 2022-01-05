@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %} Search Users {% endblock %}
+{% block content %}
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for msg in messages %}
+				<p>{{msg}}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+	<h1> Search for users:</h1>
+	<form action="#" method="POST">
+			<input type="user" name="user" placeholder="Search username"/>
+	</form>
+	<br><br>
+	{% if content == [] %}
+		<pre>No Match</pre>
+	{% else %}
+		<table style="width:80%">
+		<tr>
+			<th>Name</th>
+			<th>Username</th>
+			<th>Password</th>
+			<th>Email</th>
+			<th>Text</th>
+		</tr>
+		{% for user in content %}
+		<tr>
+			<td>{{user[0]}}</td>
+			<td>{{user[1]}}</td>
+			<td>{{user[2]}}</td>
+			<td>{{user[3]}}</td>
+			<td><form action="\texting" method="post">
+				<p><input type="submit" name="TextUser" value="Text {{user[1]}}"/></p>
+				</form>
+			</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+{% endblock %}
