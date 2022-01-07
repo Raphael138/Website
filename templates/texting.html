@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %} Texting {% endblock %}
+{% block content %}
+
+<div style="text-align: center;">
+	<h2 style="background-color:#D3D3D3"> Text </h2>
+</div>
+<br>
+<form action="#" method="POST">
+	<input type="text" name="text" placeholder="Send" style="height: 50px; width: 700px" autocomplete="off" />
+</form>
+<br><br>
+{% for i in texts %}
+	{% if i['sender'] == user%}
+		<p style="background-color:#1F51FF">{{i['time/date']}}<br>{{i['sender']}}<br>{{i['content']}}</p>
+	{% else %}
+		<p style = "background-color: #adadad">{{i['time/date']}}<br>{{i['sender']}}<br>{{i['content']}}</p>
+	{% endif %}
+	<br>
+{% endfor %}
+{% endblock %}

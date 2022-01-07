@@ -1,0 +1,23 @@
+{% extends "base.html"%}
+{% block title %} Viewing the database {% endblock %}
+{% block content %}
+	<h2> Table of all the users on the website</h2>
+	<br>
+	<table class = "user-table" style="width:80%">
+		<tr class = "user-table">
+			<th class = "user-table">Name</th>
+			<th class = "user-table">Username</th>
+			<th class = "user-table">Email</th>
+		</tr>
+		{% for user in values %}
+		<tr class = "user-table">
+			<td class = "user-table">{{user.name}}</td>
+			<td class = "user-table">{{user.username}}</td>
+			<td class = "user-table">{{user.email}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+
+	
+	
+{% endblock %}

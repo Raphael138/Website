@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block title %} Weather Forecast {% endblock %}
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+<div style="text-align: center; height: 50px;">
+    <h2 style="background-color:#7E7E7E"> Weather Forecast </h2>
+</div>
+<form action="#" method="POST">
+    <input type="coordinates" name="coordinates" placeholder="Location" style="height: 35px; width: 100%" autocomplete="off" />
+</form>
+<br>
+{% if content!="Nothing"%}
+    <div style="text-align: center;">
+        <h2 style="background-color:#CCCCCC"> {{location}} </h2>
+    </div>
+    <div id="table-wrapper">
+        <div id="table-scroll">
+            <table class="weather-table">
+                <tr style="background-color: #eee">
+                    <td> Time</td>
+                    {% for hourly in content%}
+                        {%with text = hourly[0][0], image = hourly[1]%}
+                            <td width="100"> {{text}}</td>
+                        {% endwith%}
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td> Description </td>
+                    {% for hourly in content%}
+                        {%with text = hourly[0][0], image = hourly[1]%}
+                            <td width="100"><img src={{image}} alt="Profile Picture" width="140", height="140" ></td>
+                        {% endwith%}
+                    {% endfor %}
+                </tr>
+                <tr style="background-color: #eee">
+                    <td> Conditions</td>
+                    {% for hourly in content%}
+                        {%with text = hourly[0][1], image = hourly[1]%}
+                            <td width="100"> {{text}}</td>
+                        {% endwith%}
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td> Temperature</td>
+                    {% for hourly in content%}
+                        {%with text = hourly[0][2], image = hourly[1]%}
+                            <td width="100"> {{text}}</td>
+                        {% endwith%}
+                    {% endfor %}
+                </tr>
+                <tr style="background-color: #eee">
+                    <td> Feels like</td>
+                    {% for hourly in content%}
+                        {%with text = hourly[0][3], image = hourly[1]%}
+                            <td width="100"> {{text}}</td>
+                        {% endwith%}
+                    {% endfor %}
+                </tr>
+                <tr>
+                    <td> Wind Speed</td>
+                    {% for hourly in content%}
+                        {%with text = hourly[0][4], image = hourly[1]%}
+                            <td width="100"> {{text}}</td>
+                        {% endwith%}
+                    {% endfor %}
+                </tr>
+                <tr style="background-color: #eee">
+                    <td> Humidity</td>
+                    {% for hourly in content%}
+                        {%with text = hourly[0][5], image = hourly[1]%}
+                            <td width="100"> {{text}}</td>
+                        {% endwith%}
+                    {% endfor %}
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
