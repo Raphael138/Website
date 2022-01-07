@@ -1,6 +1,7 @@
 /*It should be noted that in order for the css styling to be updated you have to press shift+
 f5 in order to also update the cache*/
-table, th, td {
+
+.user-table {
 	border: 2px solid black;
 	border-color: #0000FF;
 }
@@ -11,4 +12,22 @@ th, td {
 
 th {
 	text-align: center;
+}
+
+#table-wrapper {
+  position:relative;
+}
+
+#table-scroll {
+  height:100%;
+  overflow:auto;  
+  margin-top:20px;
+}
+
+#table-wrapper table thead th .text {
+  position:absolute;   
+  top:-20px;
+  z-index:2;
+  height:20px;
+  width:35%;
 }
