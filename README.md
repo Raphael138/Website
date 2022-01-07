@@ -1,6 +1,6 @@
 # First Website
 
-I made this website during April and May of 2021 and added some during December 2021/ Januray 2022. There templates files are the html files for the website and the css formating file is in the static folder. The website was coded using multiple libraries: flask, json and requests. The main file that compiles all the .html files together and makes the website is creatingWebsite.py. In order to go to the website, you need to first open the CMD and enter:
+I began making this website during April and May of 2021 and added some during December 2021/ Januray 2022. There templates files are the html files for the website and the css formating file is in the static folder. The website was coded using multiple libraries: flask, json and requests. The main file that compiles all the .html files together and makes the website is creatingWebsite.py. In order to go to the website, you need to first open the CMD and enter:
 ```
 python creatingWebsite.py
 ```
