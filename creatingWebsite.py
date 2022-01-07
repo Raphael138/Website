@@ -5,6 +5,8 @@ import requests
 from flask_sqlalchemy import SQLAlchemy
 import sqlite3
 from creatingChatDataframe import *
+import pytz
+from geopy.geocoders import Nominatim
 
 def getValues(dictionary):
     data_keys =["",""]
@@ -45,6 +47,9 @@ database = SQLAlchemy(app)
 # Opening a connection to the chat database
 connection = sqlite3.connect("chat.sqlite3", check_same_thread=False)
 cursor = connection.cursor()
+
+# Setting up a connection to geopy
+geolocator = Nominatim(user_agent="weather_website")
 
 class users(database.Model):
     _id = database.Column("id", database.Integer, primary_key=True)
@@ -204,7 +209,6 @@ def texting():
 
         chatName = f"text{first}{second}"
         texts = []
-        print(chatName)
         if chatExist(cursor, chatName):
             # Get the existing texts from the dataframe
             texts = getChatInfo(cursor, chatName)
@@ -219,11 +223,39 @@ def texting():
         
         # Reverse the texts so they appear in the right order
         texts.reverse()
-               
+
         return render_template("texting.html", texts = texts, user=texter)
     else:
         flash("You are not logged in and thus cannot text !")
         return redirect(url_for("login"))
+
+@app.route('/weather', methods=["POST", "GET"])
+def weather():
+    location = "Nothing"
+    if request.method=="POST":
+        location = request.form['coordinates']
+        location = geolocator.geocode(location)
+
+        if location==None:
+            flash("Enter a clear location in the form of coordinates, address, city names, etc...")
+            return render_template("weather.html", content='Nothing')
+
+    key = 'ae5ecbfb6415d10cddcea23972e386ac'
+    lat = location.raw['lat']
+    lon = location.raw['lon']
+
+    url = f"https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid={key}&units=metric"
+
+    data = requests.get(url).json()
+    content = []
+
+    for hourly in data["hourly"]:
+        timeStamp = datetime.datetime.fromtimestamp(hourly['dt'], pytz.timezone(data["timezone"])).strftime("%d/%m/%Y %H:%M")
+        text = [timeStamp,hourly['weather'][0]['description'].capitalize(),str(hourly['temp'])+"°C", str(hourly['feels_like'])+"°C",str(hourly['wind_speed']) +"m/s",str(hourly['humidity'])+"%"]
+        img_url = f"http://openweathermap.org/img/wn/{hourly['weather'][0]['icon']}@2x.png"
+        content.append([text, img_url])
+
+    return render_template("weather.html", content=content, location=location.address)
 
 database.create_all()
 app.run(debug=True)
