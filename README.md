@@ -22,3 +22,5 @@ from runQueries import *
 Then you should be able to make queries in the database of the website without having to use SQL, but rather the functions written in python in the runQueries.py file(ie. printUserInfo(), deletUser(usernm)).
 
 The website includes a database, with ability to sign in, sign up and remove your account. There is also a homepage. I also added the ability to text between user. Just like you can do queries for the user database, you can also do the same for the texting feature. Instead of importing `runQueries`, import `creatingChatDataframe`. Finally, I also added a weather page which uses `geopy` and OpenWeather to allow you to get the hourly weather for the next 48 hours for any location you type in the search bar.
+
+A functionality that I want to add is the ability to block someone from texting you. This is still a work in progress.
